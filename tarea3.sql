@@ -19,3 +19,8 @@ group by (c.customer_id, nombre) order by veces_rentado  desc limit 1;
 select f.film_id, f.title, count(r.rental_id) as veces_rentado from rental r 
 join inventory i using (inventory_id) join film f using (film_id) 
 group by (f.film_id, f.title) order by veces_rentado desc; 
+
+--Pregunta 4, ¿Cuál es nuestro revenue por store?
+select s.store_id, a.address, sum(p.amount) as revenue from payment p
+join rental r using (rental_id) join inventory i using (inventory_id) join store s using (store_id)
+join address a using (address_id) group by (s.store_id, a.address_id);
